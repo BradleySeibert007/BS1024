@@ -1,45 +1,34 @@
 import java.math.BigDecimal;
-class Tool {
-    private String sToolCode = null;
-    private ToolType ttToolType = new ToolType();
-    private String sTooltype = null;
-    private String sBrand = null;
+class ToolType {
+    public Boolean bolWeekdayCharge = true;
+    public Boolean bolWeekendCharge = false;
+    public Boolean bolHolidayCharge = false;
+    public BigDecimal bdDailyCharge;
+    void constructor(String sType) {
 
-    Tool(String sToolAbv) {
-        sToolCode = sToolAbv;
-        if(sToolAbv.equalsIgnoreCase("LADW")){
-            sTooltype = "Ladder";
-            ttToolType.setDBDailyCharge("1.99");
-            ttToolType.setBolWeekendCharge(true);
-            sBrand = "Werner";
-        }else if(sToolAbv.equalsIgnoreCase("CHNS")){
-            sTooltype = "Chainsaw";
-            ttToolType.setDBDailyCharge("1.49");
-            ttToolType.setHolidayCharge(true);
-            sBrand = "Stihl";
-        }else  if(sToolAbv.equalsIgnoreCase("JAKD") || sToolAbv.equalsIgnoreCase("JAKR")){
-            sTooltype = "Jackhammer";
-
-            ttToolType.setDBDailyCharge("2.99");
-            if(sToolAbv.equalsIgnoreCase("JAKD")){
-                sBrand = "DeWalt";
-            }else{
-                sBrand = "Rigid";
-            }
-        }else{
-            sToolCode = "fail";
-        }
     }
-    public String getSToolCode(){
-        return sToolCode;
+    public void setBolWeekendCharge(Boolean bolUpdate){
+        bolWeekendCharge = bolUpdate;
     }
-    public String getSToolType(){
-        return sTooltype;
+    public Boolean getBolWeekendCharge(){
+        return bolWeekendCharge;
     }
-    public String getSBrand(){
-        return sBrand;
+    public void setHolidayCharge(Boolean bolUpdate){
+        bolHolidayCharge = bolUpdate;
     }
-    public ToolType getTTToolType(){
-        return ttToolType;
+    public Boolean getHolidayCharge(){
+        return bolHolidayCharge;
+    }
+    public void setBolWeekdayCharge(Boolean bolUpdate){
+        bolHolidayCharge = bolUpdate;
+    }
+    public Boolean getBolWeekdayCharge(){
+        return bolHolidayCharge;
+    }
+    public void setDBDailyCharge(String sCost){
+        bdDailyCharge = new BigDecimal(sCost);
+    }
+    public BigDecimal getDBDailyCharge(){
+        return bdDailyCharge;
     }
 }
