@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 class Tool {
     private String sToolCode = null;
     private ToolType ttToolType = new ToolType();
