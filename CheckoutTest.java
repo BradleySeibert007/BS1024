@@ -8,7 +8,6 @@ import java.text.ParseException;
 
 public class CheckoutTest {
     private static Checkout c;
-    //private String [] args;
 
     @Test
     public static void main(String[] args) throws ParseException{
