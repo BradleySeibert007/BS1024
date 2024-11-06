@@ -1,9 +1,9 @@
 import java.math.BigDecimal;
 class ToolType {
-    public Boolean bolWeekdayCharge = true;
-    public Boolean bolWeekendCharge = false;
-    public Boolean bolHolidayCharge = false;
-    public BigDecimal bdDailyCharge;
+    private Boolean bolWeekdayCharge = true;
+    private Boolean bolWeekendCharge = false;
+    private Boolean bolHolidayCharge = false;
+    private BigDecimal bdDailyCharge;
     void constructor(String sType) {
 
     }
