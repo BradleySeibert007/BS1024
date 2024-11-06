@@ -13,37 +13,41 @@ public class Checkout {
     private static LocalDate cMemorial;
     private static Tool tTool;
  
-    public void main(String[] args) throws ParseException {
+   public void main(String[] args) throws ParseException {
         String sToolCode = args[0];
         int iDiscount = Integer.valueOf(args[2]);
         int iDays = Integer.valueOf(args[1]);
         String sDate = args[3];
-        if(0 <= iDiscount && iDiscount < 100){
-            if(iDays > 0){
-                SetTool(sToolCode);
-                AgreementPart1Print(args);
-                SetCurrentDate(sDate);
-                SetReturnDate(iDays);
-                AgreementPart2Print();
-                int iChargeDays = iDays;
-                iChargeDays = iChargeDays - CountWeekendDaysToRemove(iDays,tTool.getTTToolType().getBolWeekendCharge());
-                iChargeDays = iChargeDays - CountHolidaysToRemove(tTool.getTTToolType().getHolidayCharge());
-                System.out.println("Charge days: " + Integer.toString(iChargeDays));
-                BigDecimal bdDailyCost = tTool.getTTToolType().getDBDailyCharge();
-                BigDecimal bdPreDiscount = bdDailyCost.multiply(new BigDecimal(iChargeDays));
-                System.out.println("Pre-discount charge: " + bdPreDiscount.toString());
-                System.out.println("Discount percent: " + args[2]);
-                BigDecimal bdPercent = new BigDecimal(iDiscount).divide(BigDecimal.valueOf(100),2,RoundingMode.HALF_UP);
-                BigDecimal bdDiscount = bdPreDiscount.multiply(bdPercent);
-                BigDecimal bdActualCharge = bdPreDiscount.subtract(bdDiscount);
-                System.out.println("Discount amount: " + bdDiscount.toString());
-                System.out.println("Final charge: " + bdActualCharge.toString());
-            }else{
-                System.out.println("Invalid number of days: this should be a whole number 1 or greater");
-            }
+        if(!(sToolCode.equalsIgnoreCase("fail"))){
+            if(0 <= iDiscount && iDiscount < 100){
+                if(iDays > 0){
+                    SetTool(sToolCode);
+                    AgreementPart1Print(args);
+                    SetCurrentDate(sDate);
+                    SetReturnDate(iDays);
+                    AgreementPart2Print();
+                    int iChargeDays = iDays;
+                    iChargeDays = iChargeDays - CountWeekendDaysToRemove(iDays,tTool.getTTToolType().getBolWeekendCharge());
+                    iChargeDays = iChargeDays - CountHolidaysToRemove(tTool.getTTToolType().getHolidayCharge());
+                    System.out.println("Charge days: " + Integer.toString(iChargeDays));
+                    BigDecimal bdDailyCost = tTool.getTTToolType().getDBDailyCharge();
+                    BigDecimal bdPreDiscount = bdDailyCost.multiply(new BigDecimal(iChargeDays));
+                    System.out.println("Pre-discount charge: " + bdPreDiscount.toString());
+                    System.out.println("Discount percent: " + args[2]);
+                    BigDecimal bdPercent = new BigDecimal(iDiscount).divide(BigDecimal.valueOf(100),2,RoundingMode.HALF_UP);
+                    BigDecimal bdDiscount = bdPreDiscount.multiply(bdPercent);
+                    BigDecimal bdActualCharge = bdPreDiscount.subtract(bdDiscount);
+                    System.out.println("Discount amount: " + bdDiscount.toString());
+                    System.out.println("Final charge: " + bdActualCharge.toString());
+                }else{
+                    System.out.println("Invalid number of days: this should be a whole number 1 or greater");
+                }
 
+            }else{
+                System.out.println("invalid Discount percent: discount should be between 0 and 100");
+            }
         }else{
-            System.out.println("invalid Discount percent: discount should be between 0 and 100");
+            System.out.println("Invalid Tool Code: current allowable values are 'JAKR', 'LADW','CHNS', and 'JAKD'");
         }
     }
 
