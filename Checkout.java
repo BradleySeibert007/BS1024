@@ -27,8 +27,8 @@ public class Checkout {
                     SetReturnDate(iDays);
                     AgreementPart2Print();
                     int iChargeDays = iDays;
-                    iChargeDays = iChargeDays - CountWeekendDaysToRemove(iDays,tTool.getTTToolType().getBolWeekendCharge());
-                    iChargeDays = iChargeDays - CountHolidaysToRemove(tTool.getTTToolType().getHolidayCharge());
+                    iChargeDays -= CountWeekendDaysToRemove(iDays,tTool.getTTToolType().getBolWeekendCharge());
+                    iChargeDays -= CountHolidaysToRemove(tTool.getTTToolType().getHolidayCharge());
                     System.out.println("Charge days: " + Integer.toString(iChargeDays));
                     BigDecimal bdDailyCost = tTool.getTTToolType().getDBDailyCharge();
                     BigDecimal bdPreDiscount = bdDailyCost.multiply(new BigDecimal(iChargeDays));
@@ -63,14 +63,14 @@ public class Checkout {
         String sMonth = Integer.toString(cEnd.getMonthValue());
         String sDay = Integer.toString(cEnd.getDayOfMonth());
         int iYear = cEnd.getYear();
-        iYear = iYear - 2000;
+        iYear -= 2000;
         String sYear = Integer.toString(iYear);
         String sDueDate = sMonth + "/" + sDay + "/" + sYear;             
         System.out.println("Due date: " + sDueDate);
         System.out.println("Daily rental charge: " + tTool.getTTToolType().getDBDailyCharge());
     }
 
-    public int CountWeekendDaysToRemove(int iDays, boolean bWeekendCharge){
+   public int CountWeekendDaysToRemove(int iDays, boolean bWeekendCharge){
         int iWholeRemainder = 0;
         LocalDate cWeekendDayCount = c;
         int iRemoveDays = 0;
@@ -78,9 +78,9 @@ public class Checkout {
         if(!bWeekendCharge){
             while(iWholeRemainder <= iDays){
                  if(cWeekendDayCount.getDayOfWeek().toString().equalsIgnoreCase("Saturday") || cWeekendDayCount.getDayOfWeek().toString().equalsIgnoreCase("Sunday")){
-                    iRemoveDays = iRemoveDays + 1;
+                    iRemoveDays += 1;
                 }
-                iWholeRemainder = iWholeRemainder + 1;
+                iWholeRemainder += 1;
                 cWeekendDayCount = cWeekendDayCount.plusDays(1);
    
             }
