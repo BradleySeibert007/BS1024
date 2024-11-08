@@ -15,8 +15,8 @@ public class Checkout {
  
    public void main(String[] args) throws ParseException {
         String sToolCode = args[0];
-        int iDiscount = Integer.valueOf(args[2]);
-        int iDays = Integer.valueOf(args[1]);
+        int iDiscount = Integer.parseInt(args[2]);
+        int iDays = Integer.parseInt(args[1]);
         String sDate = args[3];
         if(!(sToolCode.equalsIgnoreCase("fail"))){
             if(0 <= iDiscount && iDiscount < 100){
