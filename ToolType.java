@@ -20,10 +20,10 @@ class ToolType {
         return bolHolidayCharge;
     }
     public void setBolWeekdayCharge(Boolean bolUpdate){
-        bolHolidayCharge = bolUpdate;
+        bolWeekdayCharge = bolUpdate;
     }
     public Boolean getBolWeekdayCharge(){
-        return bolHolidayCharge;
+        return bolWeekdayCharge;
     }
     public void setDBDailyCharge(String sCost){
         bdDailyCharge = new BigDecimal(sCost);
