@@ -117,20 +117,20 @@ public class Checkout {
     }
 
     public void SetCurrentDate(String sDateString){
-        int iFirstSlash = Integer.valueOf(sDateString.indexOf("/"));
+        int iFirstSlash = sDateString.indexOf("/");
         if(iFirstSlash == 1){
             sDateString = "0" + sDateString;
         }
-        int iSecondSlash = Integer.valueOf(sDateString.lastIndexOf("/"));
+        int iSecondSlash = sDateString.lastIndexOf("/");
         if(iSecondSlash ==4){
             sDateString = sDateString.substring(0, 3) + "0" + sDateString.substring(3,sDateString.length());
         }
 
         iFirstSlash = sDateString.indexOf("/");
         iSecondSlash = sDateString.lastIndexOf("/");
-        int iMonth = Integer.valueOf(sDateString.substring(0, iFirstSlash));
-        int iDayOfMonth = Integer.valueOf(sDateString.substring(iFirstSlash +1, iSecondSlash));
-        int iYear = Integer.valueOf(sDateString.substring(iSecondSlash + 1, sDateString.length()));
+        int iMonth = Integer.parseInt(sDateString.substring(0, iFirstSlash));
+        int iDayOfMonth = Integer.parseInt(sDateString.substring(iFirstSlash +1, iSecondSlash));
+        int iYear = Integer.parseInt(sDateString.substring(iSecondSlash + 1, sDateString.length()));
         c = LocalDate.of(2000 + iYear, iMonth,iDayOfMonth);
     }
 
